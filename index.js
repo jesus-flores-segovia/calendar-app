@@ -21,7 +21,9 @@ app.use(express.json());
 // Routing
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
-
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public", "index.html"));
+});
 // Listening on port 4000
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`);
