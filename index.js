@@ -13,7 +13,7 @@ dbConnection();
 app.use(cors());
 
 // Public directory
-app.use(express.static("public"));
+app.use(express.static(path.resolve(__dirname, "public")));
 
 // Reading and parsing the body using a middleware
 app.use(express.json());
@@ -22,8 +22,9 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/events", require("./routes/events"));
 app.get("*", (req, res) => {
-  res.sendFile("../public");
+  res.sendFile(path.resolve(__dirname, "public", "index.html"));
 });
+
 // Listening on port 4000
 app.listen(process.env.PORT, () => {
   console.log(`Running on port ${process.env.PORT}`);
